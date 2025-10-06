@@ -13,5 +13,3 @@ This bundle contains a lightweight HTML/CSS viewer to open your locally-generate
 3. If you don't see an image, ensure your script saved `plot.png` to the same directory as `index.html`.
 
 > Tip: You can change the `<img src="plot.png">` path in `index.html` to point to another filename if needed.
-
-Generated: 2025-09-18T19:14:52
