@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FastF1 — Driver Speed Trace</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>FastF1 — Driver Speed Trace</h1>
+        <p class="muted">
+          Enter drivers (three-letter codes like <code>VER</code>,
+          <code>LEC</code>), pick event & session, and generate a plot.
+        </p>
+      </header>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="card">
+        {% for cat, msg in messages %}
+        <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <div class="card">
+        <h2>Plot</h2>
+        <div class="img">
+          {% if plot_url %}
+          <img src="{{ plot_url }}" alt="Speed vs Distance plot" />
+          {% else %}
+          <p class="muted">No plot yet. Submit the form to generate one.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

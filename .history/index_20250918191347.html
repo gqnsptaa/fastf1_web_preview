@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FastF1 — Web Preview</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>FastF1 Web Preview</h1>
+    <p class="subtitle">Drop your generated plot as <code>plot.png</code> and view it here.</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>How to use</h2>
+      <ol>
+        <li>Run your Python script to generate a plot image:
+          <pre><code># example snippet in your Python script
+import fastf1, fastf1.plotting as f1plt
+import matplotlib.pyplot as plt
+
+fastf1.Cache.enable_cache(".fastf1")
+
+session = fastf1.get_session(2021, 7, "Q")
+session.load(laps=True)
+
+f1plt.setup_mpl()  # optional: nice style
+fig, ax = plt.subplots()
+session.laps.pick_fastest().telemetry.plot(x="Distance", y="Speed", ax=ax)
+ax.set_title(f"{session.event['EventName']} — {session.name}")
+fig.savefig("plot.png", dpi=150, bbox_inches="tight")
+print("Saved plot.png")</code></pre>
+        </li>
+        <li>Put this <code>index.html</code> and <code>styles.css</code> in the same folder as your script.</li>
+        <li>Open <strong>index.html</strong> in your browser (or use VS Code Live Server).</li>
+      </ol>
+    </section>
+
+    <section class="card gallery">
+      <h2>Plot preview</h2>
+      <div class="img-wrap">
+        <img src="plot.png" alt="Your FastF1 plot (plot.png)." />
+      </div>
+      <p class="muted">If the image doesn't show, make sure your Python script saved <code>plot.png</code> in this folder.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tips</h2>
+      <ul>
+        <li>Keep plots next to this file, or change the <code>src</code> to your actual image path.</li>
+        <li>For multiple images, duplicate the <code>&lt;img&gt;</code> element or create more cards.</li>
+        <li>Want interactivity? Save Plotly figures with <code>fig.write_html('plot.html')</code> and link them here.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made for quick local previews. Works offline.</p>
+  </footer>
+</body>
+</html>

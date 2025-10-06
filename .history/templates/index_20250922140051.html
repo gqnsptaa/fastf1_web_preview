@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FastF1 — Driver Speed Trace</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>FastF1 — Driver Speed Trace</h1>
+        <p class="muted">
+          Enter drivers (three-letter codes like <code>VER</code>,
+          <code>LEC</code>), pick event & session, and generate a plot.
+        </p>
+      </header>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="card">
+        {% for cat, msg in messages %}
+        <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <div class="card">
+        <form action="{{ url_for('plot') }}" method="post">
+          <div>
+            <label for="year">Year</label>
+            <input
+              id="year"
+              name="year"
+              type="number"
+              value="2025"
+              min="2018"
+              required
+            />
+          </div>
+          <div>
+            <label for="event">Event (name or round #)</label>
+            <input id="event" name="event" type="text" value="Baku" required />
+          </div>
+          <div>
+            <label for="session">Session</label>
+            <select id="session" name="session">
+              <option value="Q" selected>Q — Qualifying</option>
+              <option value="R">R — Race</option>
+              <option value="FP1">FP1</option>
+              <option value="FP2">FP2</option>
+              <option value="FP3">FP3</option>
+              <option value="SQ">SQ — Sprint Qualifying</option>
+              <option value="SS">SS — Sprint</option>
+            </select>
+          </div>
+          <div>
+            <label for="driver1">Driver 1 (e.g., VER)</label>
+            <input id="driver1" name="driver1" type="text" placeholder="VER" />
+          </div>
+          <div class="full">
+            <label for="driver2">Driver 2 (optional, e.g., LEC)</label>
+            <input id="driver2" name="driver2" type="text" placeholder="LEC" />
+          </div>
+          <div class="full">
+            <button type="submit">Generate Plot</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Plot</h2>
+        <div class="img">
+          {% if plot_url %}
+          <img src="{{ plot_url }}" alt="Speed vs Distance plot" />
+          {% else %}
+          <p class="muted">No plot yet. Submit the form to generate one.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

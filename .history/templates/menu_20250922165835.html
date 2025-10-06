@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FastF1 — Driver Speed Trace</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>FastF1 — Driver Speed Trace</h1>
+        <p class="muted">You will be able to do many things here soon.</p>
+      </header>
+      <div class="card">
+        <div class="full">
+          <a class="menu-btn" href="{{ url_for('index') }}"
+            >Driver Comparison</a
+          >
+          <button class="menu-btn" href="{{ url_for('index') }}">
+            Driver Comparison
+          </button>
+          <button class="menu-btn" type="submit">Driver Standings</button>
+          <button class="menu-btn" type="submit">Constructor Standings</button>
+          <button class="menu-btn" type="submit">...</button>
+          <button class="menu-btn" type="submit">...</button>
+          <button class="menu-btn" type="submit">...</button>
+          <button class="menu-btn" type="submit">...</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
